@@ -1,10 +1,11 @@
 ﻿#The $userLoc variable will prompt the user for a City and State, and then store the user's input. example: Tacoma WA
 $userLoc = read-host -prompt 'Please enter a city and state'
 $userDays = read-host -prompt 'please enter number of days for forecast'
+$int = [int] $userDays
 
 #The $formatLoc variable takes the users input, replaces any spaces with '+', and stores that value. example: Tacoma+WA
 $formatLoc = $userLoc -replace(' ', '+') 
-$forecastSeconds = $userDays
+$forecastSeconds = $int * 86400
 
 #Adds the location into the url for the API
 $googleGeoJSON = "https://maps.googleapis.com/maps/api/geocode/json?address=" + $formatloc + "&key=AIzaSyDGT-1IEg0NHsXiLAtntLxAFctMttHwTao"
