@@ -18,7 +18,13 @@ $resultsDayJSON = Invoke-RestMethod $Darkskydata -Method Get
 $varLat = $resultsLocJSON.results.geometry.location.lat #This will be your Latitude
 $varLng = $resultsLocJSON.results.geometry.location.lng #This will be your Longitude
 
-#Echos the Lat/Lon just for demonstration.
-echo $varLat
-echo $varLng
-echo $resultsDayJSON
+
+while ($Countdown = $forecastSeconds - 86400 -ge 0){
+    echo $resultsDayJSON.currently.temperature
+    $Countdown = ($forecastSeconds -= 86400) 
+    $newResults = "https://api.darksky.net/forecast/93dcf96ac1507b0bc9c572e244f7b633/" + $varLat + "," + $varLng + "," + $Countdown
+    $Final = Invoke-RestMethod $newResults -Method Get
+    echo $final
+    echo (get-Date).AddSeconds($countdown) | Get-Date -Format "dd-MMM-yyyy"
+    }
+
